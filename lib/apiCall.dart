@@ -81,6 +81,7 @@ class callAPIState extends State<callAPI> {
         desiredAccuracy: LocationAccuracy.high);
     long = position.longitude;
     lat = position.latitude;
+    normalPos = await getNormalName();
     setState(() {
       //refresh UI
     });
@@ -96,7 +97,9 @@ class callAPIState extends State<callAPI> {
             .listen((Position position) async {
       long = position.longitude;
       lat = position.latitude;
-      normalPos = await getNormalName();
+      if(normalPos.isEmpty){
+        normalPos = await getNormalName();
+      }
       setState(() {
         //refresh UI on update
       });
