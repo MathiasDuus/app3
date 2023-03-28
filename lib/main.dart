@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/gps.dart';
 import 'package:my_app/qrReader.dart';
 import 'package:my_app/apiCall.dart';
+import 'package:my_app/takePic.dart';
 import 'package:vibration/vibration.dart';
 
 void main() => runApp(const MaterialApp(home: MyHome()));
@@ -43,6 +44,15 @@ class MyHome extends StatelessWidget {
                 ));
               },
               child: const Text('Calls api'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Vibration.vibrate();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const TakePic(),
+                ));
+              },
+              child: const Text('Prøv at tage et billede good luck'),
             ),
 
             //all the children widgets that you need

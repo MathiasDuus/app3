@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,6 @@ class callAPIState extends State<callAPI> {
     _notify.value = text;
     normalPos = text;
   }
-
 
   @override
   void initState() {
@@ -103,13 +101,14 @@ class callAPIState extends State<callAPI> {
         //refresh UI on update
       });
     });
-
   }
 
   Future<String> getNormalName() async {
     var httpResponse = await fetchPOI();
     Map<String, dynamic> jsonData = jsonDecode(httpResponse.body);
-    print(jsonData['features'][0]['properties']['name']);
+    if (kDebugMode) {
+      print(jsonData['features'][0]['properties']['name']);
+    }
     var lel = jsonData['features'][0]['properties']['name'];
     return lel;
   }
