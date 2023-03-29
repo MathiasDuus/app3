@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_app/gps.dart';
 import 'package:my_app/qrReader.dart';
 import 'package:my_app/apiCall.dart';
@@ -7,7 +8,18 @@ import 'package:shake/shake.dart';
 import 'package:torch_light/torch_light.dart';
 import 'package:vibration/vibration.dart';
 
-void main() => runApp(const MyApp());
+import 'package:my_app/expert.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -50,7 +62,7 @@ class MyHomeState extends State<MyHome> {
         }
         // Do stuff on phone shake
       },
-      minimumShakeCount: 1,
+      minimumShakeCount: 10,
       shakeSlopTimeMS: 500,
       shakeCountResetTime: 3000,
       shakeThresholdGravity: 2.7,
@@ -69,7 +81,7 @@ class MyHomeState extends State<MyHome> {
               onPressed: () {
                 Vibration.vibrate();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const QRViewExample(),
+                  builder: (context) => const QRScanner(),
                 ));
               },
               child: const Text('qrView'),
@@ -100,6 +112,15 @@ class MyHomeState extends State<MyHome> {
                 ));
               },
               child: const Text('Prøv at tage et billede good luck'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Vibration.vibrate();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ExpertStuff(),
+                ));
+              },
+              child: const Text('Expert'),
             ),
 
             //all the children widgets that you need

@@ -97,7 +97,7 @@ class callAPIState extends State<callAPI> {
             .listen((Position position) async {
       long = position.longitude;
       lat = position.latitude;
-      if(normalPos.isEmpty){
+      if (normalPos.isEmpty) {
         normalPos = await getNormalName();
       }
       setState(() {
@@ -126,15 +126,19 @@ class callAPIState extends State<callAPI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            AppBar(title: const Text("☺☻♥♦♣♠"), backgroundColor: Colors.amber),
-        body: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(50),
-            child: Column(children: [
-              const Text("Henter location fra openroute services",
-                  style: TextStyle(fontSize: 20)),
-              Text("Place: $normalPos", style: const TextStyle(fontSize: 20)),
-            ])));
+      appBar:
+          AppBar(title: const Text("☺☻♥♦♣♠"), backgroundColor: Colors.amber),
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(50),
+        child: Column(
+          children: [
+            const Text("Henter location fra openroute services",
+                style: TextStyle(fontSize: 20)),
+            Text("Place: $normalPos", style: const TextStyle(fontSize: 20)),
+          ],
+        ),
+      ),
+    );
   }
 }
